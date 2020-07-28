@@ -3,8 +3,8 @@ set -e
 
 destination=${1:-System/Config}
 if [[ -d $destination ]]; then
-  if [[ -d $destination/.git ]]; then
-    echo "Destination already contains a git repository. Aborting"
+  if [[ -d $destination/refs ]]; then
+    echo "Destination already contains a bare git repository. Aborting"
     exit 1
   else
     destination=$destination/Config
