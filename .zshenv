@@ -11,6 +11,9 @@ export EDITOR=code
 export BUNDLER_EDITOR="code"
 export VISUAL=vim
 
+# Disable Google Analytics for Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+
 # OSX: Make clean tarballs and more in Leopard
 export COPYFILE_DISABLE=true
 
