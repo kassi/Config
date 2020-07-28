@@ -1,0 +1,14 @@
+#!/bin/bash
+gems=(
+  artii
+  bundler
+  cheatset
+  cocoapods
+  highline
+  mdless
+  solargraph
+)
+for gem in ${gems[@]}; do
+  ${rvm_ruby_gem_home}/wrappers/gem install $gem
+done
+
