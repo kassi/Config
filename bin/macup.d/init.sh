@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-destination=${1:-System/Config}
+destination=${1:-$HOME/System/Config}
 if [[ -d $destination ]]; then
   if [[ -d $destination/refs ]]; then
     echo "Destination already contains a bare git repository. Aborting"
