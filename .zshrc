@@ -21,3 +21,6 @@ setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS
 
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
