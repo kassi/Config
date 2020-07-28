@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Installing SynologyDrive"
+brew cask install homebrew/cask-drivers/synology-drive
+
+echo "Now set up the SynologyDrive Client with the appropriate information and sync it"
+
+echo "Waiting for the synchronization"
+check=$HOME/SynologyDrive/Mackup/Library/Preferences
+while [[ ! -d $check ]]; do
+  sleep 5
+done
+# Wait for first file to arrive
+while [[ -z $(ls -l1 $check) ]]; do
+  sleep 1
+done
+synced=$(ls -l $check)
+sleep 1
+# Wait for no more changes to this directory
+while [[ $(ls -l $check) != $synced ]]; do
+  synced=$(ls -l $check)
+  sleep 1
+done
+echo "Synchronization finished"
+

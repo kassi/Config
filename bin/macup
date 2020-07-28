@@ -1,0 +1,99 @@
+#!/bin/zsh
+
+command=$1
+
+###############################################################################
+# Check for Homebrew, else install
+###############################################################################
+echo "Checking for, or Installing Homebrew"
+if [ -z `command -v brew` ]; then
+    echo "Brew is missing! Installing it..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+else
+    echo "Homebrew: updating"
+    brew update
+    echo "Homebrew: upgrading"
+    brew upgrade
+fi
+# Avoid delays while running the script
+HOMEBREW_NO_AUTO_UPDATE=1
+
+echo "Setup Synchronization"
+. $HOME/bin/macup.d/drive
+brew install mackup
+mackup restore
+
+###############################################################################
+# Install binaries and other packages
+###############################################################################
+echo "Homebrew: installing system dependencies"
+brew install autoconf
+brew install automake
+brew install coreutils
+brew install makedepend
+brew install openssl
+brew install pkg-config
+brew install readline
+brew install findutils
+
+echo "Homebrew: installing libraries other bottles and programming languages depend on"
+#brew install icu4c
+#brew install jpeg
+#brew install libgcrypt
+#brew install libidn
+#brew install libpng
+#brew install libtiff
+#brew install libssh2
+#brew install libtool
+#brew install libuv
+
+echo "Homebrew: installing command line tools"
+brew install ack
+brew install ctags
+brew install git
+brew install tree
+brew install imagemagick
+
+
+echo "Homebrew: installing applications"
+brew cask install alfred
+brew cask install dash
+brew cask install discord
+brew cask install docker
+brew cask install homebrew/cask-versions/firefox-developer-edition
+brew cask install homebrew/cask-fonts/font-anonymice-nerd-font
+brew cask install homebrew/cask-fonts/font-fira-code-nerd-font
+brew cask install homebrew/cask-fonts/font-hack-nerd-font
+brew cask install homebrew/cask-fonts/font-source-code-pro
+brew cask install hammerspoon
+brew cask install xmind-zen
+
+[[ ! -d /Applications/1Password\ 7.app ]]         && brew cask install 1password
+[[ ! -d /Applications/DBeaver.app ]]              && brew cask install dbeaver-community
+[[ ! -d /Applications/Firefox.app ]]              && brew cask install firefox
+[[ ! -d /Applications/Google\ Chrome.app ]]       && brew cask install google-chrome
+[[ ! -d /Applications/GPG\ Keychain.app ]]        && brew cask install gpg-suite
+[[ ! -d /Applications/iTerm.app ]]                && brew cask install iterm2
+[[ ! -d /Applications/Nextcloud.app ]]            && brew cask install nextcloud
+[[ ! -d /Applications/Sequel\ Pro.app ]]          && brew cask install sequel-pro
+[[ ! -d /Applications/SourceTree.app ]]           && brew cask install sourcetree
+[[ ! -d /Applications/Visual\ Studio\ Code.app ]] && brew cask install visual-studio-code
+
+
+echo "Mac App Store: installing applications"
+brew install mas
+[[ ! -d /Applications/Flycut.app ]] && mas install 442160987
+[[ ! -d /Applications/Quiver.app ]] && mas install 866773894
+[[ ! -d /Applications/Slack.app ]]  && mas install 803453959
+[[ ! -d /Applications/Xcode.app ]]  && mas install 497799835 && sudo xcodebuild -license accept
+
+echo "Linking Visual Studio Code command line tool"
+if [[ -d /Applications/Visual\ Studio\ Code.app ]]; then
+  if [[ ! -f /usr/local/bin/code ]]; then
+    ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
+  fi
+fi
+
+echo "Install iTerm2 shell integration"
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | /bin/bash
+
