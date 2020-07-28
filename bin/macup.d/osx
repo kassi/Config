@@ -59,6 +59,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCorner
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Safari
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -int 1
