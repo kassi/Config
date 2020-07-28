@@ -1,0 +1,29 @@
+# System aliases
+alias grep='grep --color'
+alias l='ls -FGla'
+alias ll='ls -FGlag'
+alias ls='ls -FG'
+
+# Git shortcuts
+alias gpr='git pull --rebase'
+alias gps='git push'
+
+# Rails
+alias b='bundle'
+alias be='bundle exec'
+alias bo='bundle open'
+alias boe='bundle outdated --only-explicit'
+alias br='bin/rails'
+alias by='bundle && yarn'
+alias g='bundle exec guard'
+alias rake='safe_rake'
+alias rr='bundle exec rake routes'
+
+# Docker
+alias dc='docker-compose'
+alias dcc='DOCKER_HOST=$(docker context inspect | grep Host.*ssh | cut -d \" -f 4) docker-compose'
+alias dcr='docker-compose run --rm'
+
+# Tools
+alias ip='curl http://ipv4.icanhazip.com'
+alias st='/Applications/SourceTree.app/Contents/Resources/stree'
