@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 set -e
 
 destination=${1:-System/Config}
@@ -19,6 +19,17 @@ while [[ $((xcode-select --install) 2>&1) =~ "xcode-select: note: " ]]; do
     sleep 10
   done
 done
+
+# Need a valid ssh key
+if [[ ! -e $HOME/.ssh/id_rsa ]]; then
+  echo "No ssh key found."
+  read -p "Press ENTER to create a new one or CTRL-C to cancel and copy an existing one in place" < /dev/tty
+  ssh-keygen -b 4096
+  cat $HOME/.ssh/id_rsa.pub | pbcopy
+  echo "Now create a new key in Github and paste the copied public key"
+  open "https://github.com/settings/keys/new"
+  read -p "Press ENTER when done" < /dev/tty
+fi
 
 echo "Cloning into $destination."
 git clone --bare git@github.com:kassi/Config $destination
