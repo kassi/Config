@@ -8,9 +8,6 @@
 # |  .zshenv  | -> | .zprofile | -> |  .zshrc   | -> |  .zlogin  |
 # +-----------+    +-----------+    +-----------+    +-----------+
 
-[[ -r $HOME/.zsh/aliases ]] && . $HOME/.zsh/aliases
-[[ -r $HOME/.zsh/functions ]] && . $HOME/.zsh/functions
-
 bindkey -e
 bindkey "\e\e[D" backward-word
 bindkey "\e\e[C" forward-word

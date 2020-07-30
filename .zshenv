@@ -42,3 +42,6 @@ export CPPFLAGS
 export PKG_CONFIG_PATH
 PATH=$HOME/bin:/usr/local/sbin:$PATH
 PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -r $HOME/.zsh/aliases ]] && . $HOME/.zsh/aliases
+[[ -r $HOME/.zsh/functions ]] && . $HOME/.zsh/functions
