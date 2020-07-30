@@ -1,3 +1,18 @@
 function config() {
   /usr/bin/git --git-dir=$HOME/System/Config --work-tree=$HOME "$@"
 }
+
+function plist {
+  a=${1:?plist file name missing}
+  plutil -convert xml1 -o - $a
+}
+
+function diffplist {
+  a=$1
+  b=${2:?"Usage: diffplist <plist-1> <plist-2>"}
+  a1=$(mktemp)
+  b1=$(mktemp)
+  plutil -convert xml1 -o $a1 "$a"
+  plutil -convert xml1 -o $b1 "$b"
+  diff $a1 $b1
+}
