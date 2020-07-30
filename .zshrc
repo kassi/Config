@@ -23,6 +23,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS
 
+PROMPT='%F{016}%K{#606060}%f%k%K{#606060} %* %F{#a0a0a0}%f %B%~%b %F{#606060}%K{016}%f%k '
 
 [[ -e "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh" || true
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
