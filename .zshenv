@@ -41,3 +41,4 @@ export LDFLAGS
 export CPPFLAGS
 export PKG_CONFIG_PATH
 PATH=$HOME/bin:/usr/local/sbin:$PATH
+PATH="$PATH:$HOME/.rvm/bin"
