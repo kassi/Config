@@ -72,3 +72,14 @@ let g:ctrlp_show_hidden = 1
 " VIM Session
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
+
+colorscheme murphy
+set statusline=
+set statusline+=\ %f
+set statusline+=\ %m
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+set statusline+=\ %p%%\ %l:%c
+set statusline+=\ 

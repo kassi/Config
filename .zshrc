@@ -14,6 +14,8 @@
 bindkey -e
 bindkey "\e\e[D" backward-word
 bindkey "\e\e[C" forward-word
+bindkey "\e[3~" delete-char
+WORDCHARS='*?_.[]~=&;!#$%^(){}<>'
 
 HISTSIZE=100000000
 SAVEHIST=100000000
