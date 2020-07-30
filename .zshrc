@@ -26,4 +26,8 @@ setopt HIST_IGNORE_DUPS
 
 [[ -e "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh" || true
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -s "/usr/local/opt/asdf/asdf.sh" ]] && source "/usr/local/opt/asdf/asdf.sh"
 
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit
+compinit
