@@ -16,9 +16,10 @@ set hlsearch                        " highlight search results
 set incsearch                       " show search results while searching
 set laststatus=2                    " Always display the statusline in all windows
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅ " Highlight trailing spaces
-set nocompatible                    " do not use vim in vi compatible mode
-set noshowmode                      " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set modeline
 set mouse=a ttymouse=xterm2         " enable the use of the mouse in terminals
+set nocompatible                    " do not use vim in vi compatible mode
+"set noshowmode                      " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set number                          " show line numbers
 set ruler                           " show cursor position in statusbar
 set shiftwidth=2                    " Amount of columns for indentation in n mode
@@ -41,6 +42,7 @@ if has('autocmd')
   augroup END
   au BufRead,BufNewFile *.md set tw=80
   au BufRead,BufNewFile *.pro set filetype=prolog
+  au BufRead,BufNewFile .zsh/* set filetype=zsh
   au filetype crontab setlocal nobackup nowritebackup
 endif
 
@@ -83,3 +85,4 @@ set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%\ %l:%c
 set statusline+=\ 
+
