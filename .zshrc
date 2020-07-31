@@ -29,3 +29,6 @@ PROMPT='%F{016}%K{#606060}%f%k%K{#606060} %* %F{#a0a0a0}%f %B%~%b %F{#6060
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 compinit
+
+zstyle ':completion:*' special-dirs true
+
