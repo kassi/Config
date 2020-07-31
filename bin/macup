@@ -59,6 +59,7 @@ brew install imagemagick
 
 
 echo "Homebrew: installing applications"
+brew cask install java
 brew cask install alfred
 brew cask install dash
 brew cask install discord
