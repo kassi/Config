@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 command=$1
 
@@ -78,6 +78,7 @@ brew cask install xmind-zen
 [[ ! -d /Applications/DBeaver.app ]]              && brew cask install dbeaver-community
 [[ ! -d /Applications/Firefox.app ]]              && brew cask install firefox
 [[ ! -d /Applications/Google\ Chrome.app ]]       && brew cask install google-chrome
+[[ ! -f /usr/local/bin/google-chrome ]]           && ln -s /Applications/Google\ Chrome/Contents/MacOS/Google\ Chrome /usr/local/bin/google-chrome
 [[ ! -d /Applications/GPG\ Keychain.app ]]        && brew cask install gpg-suite
 [[ ! -d /Applications/iTerm.app ]]                && brew cask install iterm2
 [[ ! -d /Applications/Nextcloud.app ]]            && brew cask install nextcloud
@@ -104,3 +105,7 @@ echo "Install iTerm2 shell integration"
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | /bin/bash
 
 . $HOME/macup.d/osx
+. $HOME/macup.d/devenv
+. $HOME/macup.d/code
+. $HOME/macup.d/chrome
+

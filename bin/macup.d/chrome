@@ -1,0 +1,28 @@
+#!/bin/bash
+extensions=(
+cppjkneekbjaeellbfkmgnhonkkjfpdn # Clear Cache
+aomjjhallfgjeglblehebfpbcfeobpgk # __MSG_appName__ 1Password
+fmkadmapgofadopljbjfkapdkoienihi # React Developer Tools
+knheggckgoiihginacbkhaalnibhilkk # __MSG_webClipperExtension_name__ Notion Web Clipper
+efdhoaajjjgckpbkoglidkeendpkolai # Disable HTML5 Autoplay
+mlomiejdfkolichcflejclcbmpeaniij # __MSG_name__ Ghostery
+iphcomljdfghbkdcfndaijbokpgddeno # __MSG_extName__ Cookie Editor
+chklaanhfefbnpoihckbnefhakgolnmc # JSONView
+ogeebjpdeabhncjpfhgdibjajcajepgg # __MSG_name__ Page Monitor
+gpipahagclehninhhjkhbkliinfofnhe # Get Favicon
+lmhkpmbekcpmknklioeibfkpmmfibljd # Redux DevTools
+jnihajbhpnppcggbcgedagnkighmdlei # LiveReload
+dhdgffkkebhmkfjojejmpbldmpobfkfo # Tampermonkey
+plmapebanmikcofllaaddgeocahboejc # __MSG_ghosteryTabAppNameFirefox__
+)
+
+new="-n"
+for ext in ${extensions[@]}; do
+  echo $ext
+  chrome-cli open https://chrome.google.com/webstore/detail/TEXT/$ext $new
+  new=""
+done
+echo "Since there is no function to install chrome extensions from command line,"
+echo "please add all opened extensions to Google Chrome manually."
+read -p "Press ENTER to continue" < /dev/tty
+
