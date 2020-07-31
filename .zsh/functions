@@ -1,12 +1,17 @@
+# Tool for managing personal config files
+# Basically a git command line tool with special settings.
 function config() {
   /usr/bin/git --git-dir=$HOME/System/Config --work-tree=$HOME "$@"
 }
 
+
+# Print a binary plist to stdout
 function plist {
   a=${1:?plist file name missing}
   plutil -convert xml1 -o - $a
 }
 
+# Diff 2 binary plist files
 function diffplist {
   a=$1
   b=${2:?"Usage: diffplist <plist-1> <plist-2>"}
@@ -16,3 +21,4 @@ function diffplist {
   plutil -convert xml1 -o $b1 "$b"
   diff $a1 $b1
 }
+
