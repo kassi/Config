@@ -1,0 +1,32 @@
+[alias]
+  amend = commit --amend --reuse-message=HEAD
+  br = branch
+  ci = commit
+  co = checkout
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lm = log master.. --no-merges
+  st = status -sb
+  show-config = config --list --show-origin
+
+  update-fork = !"git fetch origin -v; git fetch upstream -v; git rebase upstream/master"
+  todo = grep --heading --break --ignore-case -e 'TODO:'
+  fixme= grep --heading --break --ignore-case -e 'FIX:' -e 'FIXME:'
+  alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+[apply]
+  whitespace = nowarn
+
+[core]
+  editor = vim
+
+[user]
+  email = karsten.silkenbaeumer@new-work.se
+  name = Karsten Silkenbäumer
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+[commit]
+  template = /Users/karsten.silkenbaeume/.stCommitMsg
