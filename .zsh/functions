@@ -4,6 +4,12 @@ function config() {
   /usr/bin/git --git-dir=$HOME/System/Config --work-tree=$HOME "$@"
 }
 
+function editconfig() {
+  IFS=$'\n' read -r -d '' -A files < <( config ls-tree -r master --name-only && printf '\0' )
+  files+=($HOME/bin)
+  files+=($HOME/SynologyDrive/Mackup)
+  code "${files[@]}"
+}
 
 # Print a binary plist to stdout
 function plist {
