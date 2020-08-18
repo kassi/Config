@@ -8,7 +8,7 @@
   st = status -sb
   show-config = config --list --show-origin
 
-  update-fork = !"git fetch origin -v; git fetch upstream -v; git rebase upstream/master"
+  update-fork = !"git fetch origin -v; git fetch upstream -v; git rebase upstream/$(git branch --show current)"
   todo = grep --heading --break --ignore-case -e 'TODO:'
   fixme= grep --heading --break --ignore-case -e 'FIX:' -e 'FIXME:'
   alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
