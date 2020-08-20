@@ -5,7 +5,7 @@ function config() {
 }
 
 function editconfig() {
-  IFS=$'\n' read -r -d '' -A files < <( config ls-tree -r master --name-only && printf '\0' )
+  IFS=$'\0' read -r -A files < <( config ls-tree -r master --name-only -z && printf '\0' )
   files+=($HOME/bin)
   files+=($HOME/SynologyDrive/Mackup)
   code "${files[@]}"
