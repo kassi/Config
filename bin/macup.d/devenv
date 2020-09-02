@@ -45,4 +45,8 @@ if [ -z `asdf plugin-list | grep '^python$'` ]; then
 	asdf global python $python_latest
 fi
 
+################################################################################
+# Install YARN for Node JS
+################################################################################
+npm install -g yarn
 
