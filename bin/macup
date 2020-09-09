@@ -83,6 +83,7 @@ brew cask install xmind-zen
 [[ ! -d /Applications/GPG\ Keychain.app ]]        && brew cask install gpg-suite
 [[ ! -d /Applications/iTerm.app ]]                && brew cask install iterm2
 [[ ! -d /Applications/Nextcloud.app ]]            && brew cask install nextcloud
+[[ ! -d /Applications/Postman.app ]]              && brew cask install postman
 [[ ! -d /Applications/Sequel\ Pro.app ]]          && brew cask install sequel-pro
 [[ ! -d /Applications/SourceTree.app ]]           && brew cask install sourcetree
 [[ ! -d /Applications/Visual\ Studio\ Code.app ]] && brew cask install visual-studio-code
