@@ -1,9 +1,32 @@
 #!/bin/bash
 
-# Dock
-defaults write com.apple.Dock tilesize -integer 48
-defaults write com.apple.Dock show-recents -int 0
-# Active corners: top right enabled screen saver
+# Make a backup
+defaults read > .defaults.$(date +%Y-%m-%d-%H-%M-%S)
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# System Preferences
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > General > Appearance
+defaults write -globalDomain AppleInterfaceStyleSwitchesAutomatically -bool true
+
+# System Preferences > General > Click in the scrollbar to:
+#     true:   One page
+#     false:  Jump to the spot that's clicked
+defaults write -globalDomain AppleScrollerPagingBehavior -bool false
+
+# System Preferences > General > Sidebar icon size: Medium
+defaults write -globalDomain NSTableViewDefaultSizeMode -int 2
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Desktop & Screen Saver > Start after: Never
+defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Desktop & Screen Saver > Active Corners
+#
 # Possible values:
 #  0: no-op
 #  2: Mission Control (all windows)
@@ -22,55 +45,184 @@ defaults write com.apple.Dock wvous-tr-modifier -int 0
 defaults write com.apple.Dock wvous-tl-corner -int 0
 defaults write com.apple.Dock wvous-br-corner -int 0
 defaults write com.apple.Dock wvous-bl-corner -int 0
-#
-killall Dock
 
-# Keyboard
-defaults write NSGlobalDomain com.apple.keyboard.fnState -int 1
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Dock > Size:
+defaults write com.apple.Dock tilesize -integer 48
+
+# System Preferences > Dock > Magnification:
+defaults write com.apple.dock magnification -bool false
+
+# System Preferences > Dock > Size (magnified):
+# defaults write com.apple.dock largesize -int 54
+i
+# System Preferences > Dock > Minimize windows using: Scale effect
+defaults write com.apple.dock mineffect -string "scale"
+
+# System Preferences > Dock > Minimize windows into application icon
+defaults write com.apple.dock minimize-to-application -bool true
+
+# System Preferences > Dock > Show recently used applications
+defaults write com.apple.Dock show-recents -bool false
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Mission Control > Automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Accessibility > Voide Over: off
+defaults write com.apple.universalaccess voideOverOnOffKey -bool false
+
+# System Preferences > Accessibility > Zoom > scroll gesture with ctrl
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad HIDScrollZoomModifierMask -int 262144
+defaults write com.apple.driver.AppleMultitouchTrackpad HIDScrollZoomModifierMask -int 262144
+defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Keyboard > Keyboard > Key Repeat
+defaults write NSGlobalDomain KeyRepeat -int 6
+
+# System Preferences > Keyboard > Keyboard > Initial Key Repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
+
+# System Preferences > Keyboard > Keyboard > Show keyboard and emoji viewer in menu bar
+# defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>Bundle ID</key><string>com.apple.CharacterPaletteIM</string><key>InputSourceKind</key><string>Non Keyboard Input Method</string></dict>'
+
+# System Preferences > Keyboard > Keyboard > Use F1, F2, etc. keys as standard function keys on external keyboards
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+
 # Tab keys goes through all controls
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
-# Disable quote substitution
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -int 0
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -int 0
-# Remap Focus to next window to CMD-^
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "{enabled = 0; value = { parameters = (65535, 10, 1048576); type = 'standard'; }; }"
-# Disable Show/Hide Dock
+# defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+
+# System Preferences > Keyboard > Text > Correct spelling automatically
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
+defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool true
+
+# System Preferences > Keyboard > Text > Capitalize words automatically
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# System Preferences > Keyboard > Text > Add period with double-space
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
+
+# System Preferences > Keyboard > Text > Touch Bar typing suggestions
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool true
+
+
+# System Preferences > Keyboard > Text > Use smart quotes and dashes
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# TODO: Add replacements
+
+# System Preferences > Keyboard > Shortcuts
+
+# System Preferences > Keyboard > Shortcuts > Launchpad & Dock > Disable Show/Hide Dock
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 52 "{enabled = 0; value = { parameters = (100, 2, 1572864); type = 'standard'; }; }"
 
-# App Shortcuts
-# I'm used to hit CMD-Ö/CMD-Ä on a german keyboard
-defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "N\\U00e4chsten Tab ausw\\U00e4hlen" "@\\U00e4"
-defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Vorherigen Tab ausw\\U00e4hlen" "@\\U00f6"
-defaults write com.apple.Safari NSUserKeyEquivalents -dict-add "N\\U00e4chsten Tab anzeigen" "@\\U00e4"
-defaults write com.apple.Safari NSUserKeyEquivalents -dict-add "Vorherigen Tab anzeigen" "@\\U00f6"
-defaults write com.apple.Terminal NSUserKeyEquivalents -dict-add "N\\U00e4chsten Tab ausw\\U00e4hlen" "@\\U00e4"
-defaults write com.apple.Terminal NSUserKeyEquivalents -dict-add "Vorherigen Tab ausw\\U00e4hlen" "@\\U00f6"
-defaults write com.cisco.Jabber NSUserKeyEquivalents -dict-add "N\\U00e4chste Registerkarte ausw\\U00e4hlen" "@\\U00e4"
-defaults write com.cisco.Jabber NSUserKeyEquivalents -dict-add "Vorherige Registerkarte ausw\\U00e4hlen" "@\\U00f6"
+# System Preferences > Keyboard > Shortcuts > Display > Disable Lower intensity
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 53 "{enabled = 0; value = { parameters = (65535, 107, 8388608); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 55 "{enabled = 0; value = { parameters = (65535, 107, 8912896); type = 'standard'; }; }"
+
+# System Preferences > Keyboard > Shortcuts > Display > Disable Raise intensity
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 54 "{enabled = 0; value = { parameters = (65535, 113, 8388608); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 56 "{enabled = 0; value = { parameters = (65535, 113, 8912896); type = 'standard'; }; }"
+
+# System Preferences > Keyboard > Shortcuts > Keyboard > Remap Focus to next window to CMD-^
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "{enabled = 0; value = { parameters = (65535, 10, 1048576); type = 'standard'; }; }"
+
+# System Preferences > Keyboard > Shortcuts > App Shortcuts
+# All Applications
 defaults write NSGlobalDomain NSUserKeyEquivalents -dict-add "Zoom" "@~m"
 defaults write NSGlobalDomain NSUserKeyEquivalents -dict-add "Zoomen" "@~m"
 
-# Mouse
-defaults write NSGlobalDomain AppleEnableMouseSwipeNavigateWithScrolls -int 1
-defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton
+# Per Application - all applications have to be listed in com.apple.custommenu.apps
+defaults write com.apple.universalaccess com.apple.custommenu.apps -array "com.apple.Safari" "com.google.Chrome" "com.googlecode.iterm2" "com.apple.Terminal"
 
-# Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.Safari NSUserKeyEquivalents -dict-add "Nächsten Tab anzeigen" -string "@ä"
+defaults write com.apple.Safari NSUserKeyEquivalents -dict-add "Vorherigen Tab anzeigen" -string "@ö"
+defaults write com.apple.Terminal NSUserKeyEquivalents -dict-add "Nächsten Tab auswählen" -string "@ä"
+defaults write com.apple.Terminal NSUserKeyEquivalents -dict-add "Vorherigen Tab auswählen" -string "@ö"
+defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Show Next Window Tab" -string "@ä"
+defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Show Next Window Tab" -string "@ö"
+defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Nächsten Tab auswählen" -string "@ä"
+defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Vorherigen Tab auswählen" -string "@ö"
+defaults write com.googlecode.iterm2 NSUserKeyEquivalents -dict-add "Advanced Paste…" -string "@~^v"
+
+# System Preferences > Keyboard > Input Sources > Show input sources in menu bar
+defaults write com.apple.TextInputMenu visible -bool true
+defaults write com.apple.TextInputMenuAgent "NSStatusItem Visible Item-0" -bool true
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Trackpad > Point & Click: Look up & data detectors
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
+
+# System Preferences > Trackpad > Point & Click: Secondary click
+defaults write NSGlobalDomain ContextMenuGesture -bool true
+# System Preferences > Trackpad > Point & Click: Secondary click = click with two fingers
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# System Preferences > Trackpad > Point & Click: Secondary click = click bottom right
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool false
+# defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+# defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
+# System Preferences > Trackpad > Point & Click: Secondary click = click bottom left
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 1
+# defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool false
+# defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 1
+# defaults write com.apple.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
+
+# System Preferences > Trackpad > Point & Click: Tap to click
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+
+# System Preferences > Trackpad > Point & Click: Force click and haptic feedback off
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -bool true
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool false
+defaults write com.apple.preference.trackpad ForceClickSavedState -bool false
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+# System Preferences > Mouse > Tracking speed
+defaults write NSGlobalDomain com.apple.mouse.scaling -float 2
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Safari
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Safari
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -int 1
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -int 1
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -int 1
+# Safari > Privacy: Prevent cross site tracking
+# ?
+# Safari > Advanced: Show full address
+# ?
+# Safari > Advanced: Show developer menu
+defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Terminal
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Add Terminal Settings - run the terminal installer first
 defaults write com.apple.Terminal "Default Window Settings" Pro
 defaults write com.apple.Terminal "Startup Window Settings" Pro
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 # disable ip v6 - gpg doesn't find keyserver with it
 # networksetup -setv6off Ethernet
 networksetup -setv6off Wi-Fi
+
+killall Dock
+killall Finder
+echo "Some changes require a logout or restart to take effect."
+echo "Enabling 'Unlock with Apple Watch' needs firther steps"
+open -b com.apple.systempreferences /System/Library/PreferencePanes/Security.prefPane
+
