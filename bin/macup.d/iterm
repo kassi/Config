@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for profile in $HOME/SynologyDrive/Mackup/.config/iterm/*.itermcolors; do
+  open $profile
+done
