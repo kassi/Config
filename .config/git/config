@@ -18,15 +18,18 @@
 
 [core]
   editor = vim
+	excludesfile = ~/.config/git/ignore
 
 [user]
-  email = karsten.silkenbaeumer@new-work.se
-  name = Karsten Silkenbäumer
+	email = kassi@users.noreply.github.com
+	name = Karsten Silkenbäumer
 [difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [commit]
-  template = /Users/karsten.silkenbaeume/.stCommitMsg
+	template = ~/.stCommitMsg
+[init]
+	defaultBranch = main
