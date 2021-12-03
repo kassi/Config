@@ -16,6 +16,9 @@ fi
 ################################################################################
 brew install asdf
 
+# Prepare autoinstalls
+[ ! -f $HOME/.default-python-packages ] && ln -s $HOME/bin/macup.d/.default-python-packages $HOME
+
 if [ -z `asdf plugin-list | grep '^erlang$'` ]; then
   asdf plugin-add erlang
 	export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
