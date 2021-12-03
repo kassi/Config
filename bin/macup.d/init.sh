@@ -27,7 +27,7 @@ if [[ ! -e $HOME/.ssh/id_rsa ]]; then
   ssh-keygen -b 4096
   cat $HOME/.ssh/id_rsa.pub | pbcopy
   echo "Now create a new key in Github and paste the copied public key"
-  open "https://github.com/settings/keys/new"
+  open "https://github.com/settings/ssh/new"
   read -p "Press ENTER when done" < /dev/tty
 fi
 
