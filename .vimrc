@@ -75,6 +75,7 @@ map ä :tabnext<CR>
 map ö :tabprev<CR>
 
 " CtrlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_show_hidden = 1
 
 " VIM Session
