@@ -1,8 +1,14 @@
+#echo .zsh/aliases
 # System aliases
+alias env='env|sort'
 alias grep='grep --color'
-alias l='ls -FGla'
-alias ll='ls -FGlag'
+alias l='ls -Fg'
+alias la='ls -la'
+alias ll='ls -l'
 alias ls='ls -FG'
+
+# Projects
+alias dev='cd ~/SynologyDrive/Develop/'
 
 # Git shortcuts
 alias gpr='git pull --rebase'
@@ -21,9 +27,14 @@ alias rr='bundle exec rake routes'
 
 # Docker
 alias dc='docker-compose'
+alias dc1='docker-compose-v1'
 alias dcc='DOCKER_HOST=$(docker context inspect | grep Host.*ssh | cut -d \" -f 4) docker-compose'
 alias dcr='docker-compose run --rm'
+alias dcs='DOCKER_CONTEXT=v1 docker-compose'
 
 # Tools
 alias ip='curl http://ipv4.icanhazip.com'
 alias st='/Applications/SourceTree.app/Contents/Resources/stree'
+
+# Helper
+alias kill-code="ps ax | grep 'Visual Studio Code' | grep -v grep | awk '{print \$1}' | xargs kill -9"

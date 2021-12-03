@@ -5,10 +5,12 @@ function config() {
 }
 
 function editconfig() {
-  IFS=$'\0' read -r -A files < <( config ls-tree -r master --name-only -z && printf '\0' )
-  files+=($HOME/bin)
-  files+=($HOME/SynologyDrive/Mackup)
-  code "${files[@]}"
+  code $HOME/.config.code-workspace
+}
+
+# Print the path in a readable way
+function path() {
+  ruby -e 'require "pp"; pp ENV["PATH"].split(":")'
 }
 
 # Print a binary plist to stdout
@@ -28,3 +30,55 @@ function diffplist {
   diff $a1 $b1
 }
 
+# Diff stdout output of 2 commands
+function stdiff() {
+  args=($@)
+  for i in {1..${#args[@]}}; do
+    if [[ ${args[$i]} = "--" ]]; then
+      d=$i
+    fi
+  done
+  if [[ -z $d ]]; then
+    echo Usage: stdiff <cmd1> [arg ...] -- <cmd2> [arg ...]
+    return
+  fi
+  set -x
+  cmd1=(${args:0:$d-1})
+  echo $cmd1
+  cmd2=${args:$d}
+  echo $cmd2
+  tmp1=$(mktemp)
+  tmp2=$(mktemp)
+  IFS=''; { eval $cmd1 } | cat -
+  IFS=''; { eval $cmd2 } | cat -
+  echo $tmp1
+  echo "----"
+  cat $tmp1
+  echo "===="
+  echo $tmp2
+  cat $tmp2
+  echo $?
+  if [[ $? == 0 ]]; then
+    echo "null"
+    diff $tmp1 $tmp2
+  fi
+  #rm $tmp1 $tmp2
+}
+
+
+# List chrome extensions
+function google-chrome-list-extensions() {
+  ext_path="$HOME/Library/ApplicationSupport/Google/Chrome/Default/Extensions"
+  cd $ext_path
+  for f in $(find . -maxdepth 3 -name manifest.json); do
+    id=${f#./}
+    id=${id%%/*}
+    echo -n "$id # "
+    cat $f | jq -r '.| "\(.name)"'
+  done
+}
+
+function upload_gem() {
+  name="$1"
+  curl -X POST -u $USER -F "file=@${name}" https://gems.xing.com/upload
+}
