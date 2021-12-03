@@ -2,7 +2,6 @@
 :backtrace: false
 :update_sources: true
 :sources:
-- http://gems.xing.com
 - https://rubygems.org
 gem: --no-document
 

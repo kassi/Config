@@ -4,10 +4,15 @@ gems=(
   bundler
   cheatset
   cocoapods
+  dip
   highline
   mdless
+  fastri
+  rcodetools
   solargraph
   thor
+  ruby-debug-ide
+  debase
 )
 for gem in ${gems[@]}; do
   ${rvm_ruby_gem_home}/wrappers/gem install $gem
