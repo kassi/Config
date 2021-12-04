@@ -21,6 +21,7 @@ export VISUAL=vim
 
 # Disable Google Analytics for Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+PATH=/opt/homebrew/bin:$PATH
 
 # OSX: Make clean tarballs and more in Leopard
 export COPYFILE_DISABLE=true
