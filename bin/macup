@@ -69,23 +69,24 @@ brew install pstree
 brew install tree
 brew install imagemagick
 brew install java
+brew install svn
 
 header "Homebrew: installing applications"
 [[ ! -d /Applications/Alfred\ 4.app ]]                    && brew install --cask alfred
 [[ ! -f ~/Library/Application\ Support/Alfred/prefs.json ]] && cp ~/SynologyDrive/Mackup/Library/Application\ Support/Alfred/prefs.json ~/Library/Application\ Support/Alfred/prefs.json
-[[ ! -d /Applications/Camera\ Settings.app ]]             && brew install --cask logitech-camera-setting
+[[ ! -d /Applications/Camera\ Settings.app ]]             && brew install --cask logitech-camera-settings
 [[ ! -d /Applications/Dash.app ]]                         && brew install --cask dash
 [[ ! -d /Applications/DBeaver.app ]]                      && brew install --cask dbeaver-community
 [[ ! -d /Applications/Discord.app ]]                      && brew install --cask discord
 [[ ! -d /Applications/Docker.app ]]                       && brew install --cask docker
 [[ ! -d /Applications/Firefox.app ]]                      && brew install --cask firefox
-[[ ! -d /Applications/Firefox\ Developer\ Edition.app ]]  && brew install --cask --language en firefox-developer-edition
+[[ ! -d /Applications/Firefox\ Developer\ Edition.app ]]  && brew install --cask --language en homebrew/cask-versions/firefox-developer-edition
 [[ ! -d /Applications/Google\ Chrome.app ]]               && brew install --cask google-chrome
-[[ ! -f /usr/local/bin/google-chrome ]]                   && ln -s /Applications/Google\ Chrome/Contents/MacOS/Google\ Chrome /usr/local/bin/google-chrome
+[[ ! -f $HOME/bin/google-chrome ]]                        && ln -s /Applications/Google\ Chrome/Contents/MacOS/Google\ Chrome $HOME/bin/google-chrome
 [[ ! -d /Applications/GPG\ Keychain.app ]]                && brew install --cask gpg-suite
 [[ ! -d /Applications/iTerm.app ]]                        && brew install --cask iterm2
 [[ ! -d /Applications/Hammerspoon.app ]]                  && brew install --cask hammerspoon
-[[ ! -f /usr/local/bin/hs ]]                              && ln -s /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/hs /usr/local/bin/hs
+[[ ! -f $HOME/bin/hs ]]                                   && ln -s /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/hs $HOME/bin/hs
 [[ ! -d /Applications/Karabiner-Elements.app ]]           && brew install --cask karabiner-elements
 [[ ! -d /Applications/Logi\ Options.app ]]                && brew install --cask logitech-options
 [[ ! -d /Applications/OmniFocus.app ]]                    && brew install --cask omnifocus
@@ -112,8 +113,8 @@ brew install mas
 
 header "Linking Visual Studio Code command line tool"
 if [[ -d /Applications/Visual\ Studio\ Code.app ]]; then
-  if [[ ! -f /usr/local/bin/code ]]; then
-    ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
+  if [[ ! -f $HOME/bin/code ]]; then
+    ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code $HOME/bin/code
   fi
 fi
 
@@ -121,11 +122,11 @@ header "Install iTerm2 shell integration"
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | /bin/bash
 
 header "Install sub macups"
-. $HOME/macup.d/osx
-. $HOME/macup.d/devenv
-. $HOME/macup.d/code
-. $HOME/macup.d/chrome
-. $HOME/macup.d/firefox
-. $HOME/macup.d/iterm
-. $HOME/macup.d/xcode
-. $HOME/macup.d/printer
+. $HOME/bin/macup.d/osx
+. $HOME/bin/macup.d/devenv
+. $HOME/bin/macup.d/code
+. $HOME/bin/macup.d/chrome
+. $HOME/bin/macup.d/firefox
+. $HOME/bin/macup.d/iterm
+. $HOME/bin/macup.d/xcode
+. $HOME/bin/macup.d/printer
