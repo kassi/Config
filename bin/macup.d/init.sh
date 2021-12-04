@@ -43,7 +43,8 @@ set +e
 config checkout 2>/dev/null
 if [ $? != 0 ]; then
   echo "Backing up pre-existing dot files."
-  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs tar cf .config-backup/$(date +"%Y-%m-%d-%H:%M:%S").tar
+  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs rm {}
 fi
 set -e
 config checkout
