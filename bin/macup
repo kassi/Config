@@ -2,10 +2,18 @@
 
 command=$1
 
+header() {
+  cat <<-ECHO
+###############################################################################
+# $1
+###############################################################################
+ECHO
+}
+
 ###############################################################################
 # Check for Homebrew, else install
 ###############################################################################
-echo "Checking for, or Installing Homebrew"
+header "Installing Homebrew"
 if [ -z `command -v brew` ]; then
     echo "Brew is missing! Installing it..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -16,9 +24,12 @@ else
     brew upgrade
 fi
 # Avoid delays while running the script
-HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=1
 
-echo "Setup Synchronization"
+heder "Setup Password Manager"
+. $HOME/bin/macup.d/1pass
+
+header "Setup Synchronization"
 . $HOME/bin/macup.d/drive
 brew install mackup
 mackup restore
@@ -26,7 +37,7 @@ mackup restore
 ###############################################################################
 # Install binaries and other packages
 ###############################################################################
-echo "Homebrew: installing system dependencies"
+header "Homebrew: installing system dependencies"
 brew install autoconf
 brew install automake
 brew install coreutils
@@ -36,7 +47,7 @@ brew install pkg-config
 brew install readline
 brew install findutils
 
-echo "Homebrew: installing libraries other bottles and programming languages depend on"
+header "Homebrew: installing libraries other bottles and programming languages depend on"
 #brew install icu4c
 #brew install jpeg
 #brew install libgcrypt
@@ -47,7 +58,7 @@ echo "Homebrew: installing libraries other bottles and programming languages dep
 #brew install libtool
 #brew install libuv
 
-echo "Homebrew: installing command line tools"
+header "Homebrew: installing command line tools"
 brew install ack
 brew install blueutil
 brew install ctags
@@ -59,60 +70,63 @@ brew install tree
 brew install imagemagick
 
 
-echo "Homebrew: installing applications"
+header "Homebrew: installing applications"
 brew install --cask java
-brew install --cask alfred
-brew install --cask dash
-brew install --cask discord
-brew install --cask docker
-brew install --cask homebrew/cask-versions/firefox-developer-edition
-brew install --cask homebrew/cask-fonts/font-anonymice-nerd-font
-brew install --cask homebrew/cask-fonts/font-fira-code-nerd-font
-brew install --cask homebrew/cask-fonts/font-hack-nerd-font
-brew install --cask homebrew/cask-fonts/font-source-code-pro
-brew install --cask hammerspoon
-ln -s /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/hs /usr/local/bin/hs
-brew install --cask karabiner-elements
-brew install --cask xmind-zen
-
-[[ ! -d /Applications/1Password\ 7.app ]]                 && brew install --cask 1password
+[[ ! -d /Applications/Alfred\ 4.app ]]                    && brew install --cask alfred
+[[ ! -f ~/Library/Application\ Support/Alfred/prefs.json]] && cp ~/SynologyDrive/Mackup/Library/Application\ Support/Alfred/prefs.json ~/Library/Application\ Support/Alfred/prefs.json
+[[ ! -d /Applications/Camera\ Settings.app ]]             && brew install --cask logitech-camera-setting
+[[ ! -d /Applications/Dash.app ]]                         && brew install --cask dash
 [[ ! -d /Applications/DBeaver.app ]]                      && brew install --cask dbeaver-community
+[[ ! -d /Applications/Discord.app ]]                      && brew install --cask discord
+[[ ! -d /Applications/Docker.app ]]                       && brew install --cask docker
 [[ ! -d /Applications/Firefox.app ]]                      && brew install --cask firefox
 [[ ! -d /Applications/Firefox\ Developer\ Edition.app ]]  && brew install --cask --language en firefox-developer-edition
 [[ ! -d /Applications/Google\ Chrome.app ]]               && brew install --cask google-chrome
 [[ ! -f /usr/local/bin/google-chrome ]]                   && ln -s /Applications/Google\ Chrome/Contents/MacOS/Google\ Chrome /usr/local/bin/google-chrome
 [[ ! -d /Applications/GPG\ Keychain.app ]]                && brew install --cask gpg-suite
 [[ ! -d /Applications/iTerm.app ]]                        && brew install --cask iterm2
-[[ ! -d /Applications/Nextcloud.app ]]                    && brew install --cask nextcloud
+[[ ! -d /Applications/Hammerspoon.app ]]                  && brew install --cask hammerspoon
+[[ ! -f /usr/local/bin/hs ]]                              && ln -s /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/hs /usr/local/bin/hs
+[[ ! -d /Applications/Karabiner-Elements.app ]]           && brew install --cask karabiner-elements
+[[ ! -d /Applications/Logi\ Options.app ]]                && brew install --cask logitech-options
+[[ ! -d /Applications/OmniFocus.app ]]                    && brew install --cask omnifocus
+[[ ! -d /Applications/OmniOutliner.app ]]                 && brew install --cask omnioutliner
 [[ ! -d /Applications/Postman.app ]]                      && brew install --cask postman
 [[ ! -d /Applications/Sequel\ Pro.app ]]                  && brew install --cask sequel-pro
+[[ ! -d /Applications/SF\ Symbols.app ]]                  && brew install --cask sf-symbols
 [[ ! -d /Applications/SourceTree.app ]]                   && brew install --cask sourcetree
 [[ ! -d /Applications/Visual\ Studio\ Code.app ]]         && brew install --cask visual-studio-code
+[[ ! -d /Applications/VMware\ Fusion.app ]]               && brew install --cask vmware-fusion
+[[ ! -d /Applications/XMind.app ]]                        && brew install --cask xmind-zen
 
+brew install --cask homebrew/cask-fonts/font-anonymice-nerd-font
+brew install --cask homebrew/cask-fonts/font-fira-code-nerd-font
+brew install --cask homebrew/cask-fonts/font-hack-nerd-font
+brew install --cask homebrew/cask-fonts/font-source-code-pro
 
-echo "Mac App Store: installing applications"
+header "Mac App Store: installing applications"
 brew install mas
-[[ ! -d /Applications/Flycut.app ]] && mas install 442160987
-[[ ! -d /Applications/Quiver.app ]] && mas install 866773894
-[[ ! -d /Applications/Slack.app ]]  && mas install 803453959
-[[ ! -d /Applications/Xcode.app ]]  && mas install 497799835 && sudo xcodebuild -license accept
+[[ ! -d /Applications/Flycut.app ]]      && mas install 442160987
+[[ ! -d /Applications/Slack.app ]]       && mas install 803453959
+[[ ! -d /Applications/Xcode.app ]]       && mas install 497799835 && sudo xcodebuild -license accept
+[[ ! -d /Applications/CommentHere.app ]] && mas install 1406737173
 
-echo "Linking Visual Studio Code command line tool"
+header "Linking Visual Studio Code command line tool"
 if [[ -d /Applications/Visual\ Studio\ Code.app ]]; then
   if [[ ! -f /usr/local/bin/code ]]; then
     ln -s /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code /usr/local/bin/code
   fi
 fi
 
-echo "Install iTerm2 shell integration"
+header "Install iTerm2 shell integration"
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | /bin/bash
 
+header "Install sub macups"
 . $HOME/macup.d/osx
 . $HOME/macup.d/devenv
 . $HOME/macup.d/code
 . $HOME/macup.d/chrome
-. $HOME/macup.d/drive
 . $HOME/macup.d/firefox
 . $HOME/macup.d/iterm
 . $HOME/macup.d/xcode
-
+. $HOME/macup.d/printer

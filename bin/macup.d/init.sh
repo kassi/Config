@@ -50,3 +50,4 @@ config checkout
 config config status.showUntrackedFiles no
 
 echo "Checkout finished. Your dotfiles are now in place."
+echo "Now run `bin/macup` to install apps."

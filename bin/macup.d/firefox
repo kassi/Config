@@ -1,0 +1,48 @@
+#!/bin/bash
+
+bt install
+mv $HOME/.mozilla/native-messaging-hosts/brotab_mediator.json $HOME/Library/ApplicationSupport/Mozilla/NativeMessagingHosts/
+rm -rf $HOME/.mozilla
+applications=(
+  Firefox
+  FirefoxDeveloperEdition
+)
+
+extensions_Firefox=(
+  1password-x-password-manager
+  notion-web-clipper
+  tampermonkey
+  ghostery
+  brotab
+  i-dont-care-about-cookies
+  cookie-autodelete
+  fvd-speed-dial
+)
+extensions_FirefoxDeveloperEdition=(
+  1password-x-password-manager
+  react-devtools
+  reduxdevtools
+  livereload-web-extension
+  quick-accept-language-switc
+  notion-web-clipper
+  tampermonkey
+  ghostery
+  brotab
+  i-dont-care-about-cookies
+  cookie-autodelete
+)
+
+for app in ${applications[@]}; do
+  new=--new-window
+  for ext in ${esxtensions[@]}; do
+    echo $ext 
+    /Applications/$app.app/Contents/MacOS/firefox $new https://addons.mozilla.org/de/firefox/addon/$ext
+    new=--new-tab
+  done
+done
+exit
+
+echo "Since there is no function to install firefox extensions from command line,"
+echo "please add all opened extensions to Firefox and FirefoxDeveloperEdition manually."
+read -p "Press ENTER to continue" < /dev/tty
+

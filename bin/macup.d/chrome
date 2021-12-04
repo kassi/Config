@@ -23,6 +23,6 @@ for ext in ${extensions[@]}; do
   new=""
 done
 echo "Since there is no function to install chrome extensions from command line,"
-echo "please add all opened extensions to Google Chrome manually."
+echo "Please add all opened extensions to Google Chrome manually."
 read -p "Press ENTER to continue" < /dev/tty
 

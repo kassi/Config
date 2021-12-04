@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Now opening URL to install special canon software"
+open https://ij.manual.canon/ij/webmanual/WebPortal/PTL/ptl-setup.html?lng=de&type=setup&mdl=TR8550&area=eu&os=m
+
+echo "If the above link doesn't work, start here: http://lj.start.canon"

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo "Installing SynologyDrive"
-brew cask install homebrew/cask-drivers/synology-drive
-
+[[ ! -d /Applications/Synology\ Drive\ Client.app ]] && brew install --cask synology-drive
 echo "Now set up the SynologyDrive Client with the appropriate information and sync it"
 
 echo "Waiting for the synchronization"

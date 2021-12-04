@@ -1,0 +1,8 @@
+#!/bin/bash
+
+[[ ! -d /Applications/1Password\ 7.app ]]                 && brew install --cask 1password
+
+echo "Now set up 1Password"
+open /Applications/1Password\ 7.app
+
+read -p "Press ENTER to continue" < /dev/tty
