@@ -68,12 +68,11 @@ brew install jq
 brew install pstree
 brew install tree
 brew install imagemagick
-
+brew install java
 
 header "Homebrew: installing applications"
-brew install --cask java
 [[ ! -d /Applications/Alfred\ 4.app ]]                    && brew install --cask alfred
-[[ ! -f ~/Library/Application\ Support/Alfred/prefs.json]] && cp ~/SynologyDrive/Mackup/Library/Application\ Support/Alfred/prefs.json ~/Library/Application\ Support/Alfred/prefs.json
+[[ ! -f ~/Library/Application\ Support/Alfred/prefs.json ]] && cp ~/SynologyDrive/Mackup/Library/Application\ Support/Alfred/prefs.json ~/Library/Application\ Support/Alfred/prefs.json
 [[ ! -d /Applications/Camera\ Settings.app ]]             && brew install --cask logitech-camera-setting
 [[ ! -d /Applications/Dash.app ]]                         && brew install --cask dash
 [[ ! -d /Applications/DBeaver.app ]]                      && brew install --cask dbeaver-community
