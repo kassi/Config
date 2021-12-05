@@ -1,9 +1,10 @@
 #!/bin/bash
 TEMPLATE_DIR=$HOME/SynologyDrive/Mackup
 
-path=/Applications/Xcode/Contents/Frameworks/IDEKit.framework/Versions/A/Resources/
+path=/Applications/Xcode.app/Contents/Frameworks/IDEKit.framework/Versions/A/Resources/
 [[ ! -d $path/IDETextKeyBindingSet.plist.orig ]] && sudo cp $path/IDETextKeyBindingSet.plist $path/IDETextKeyBindingSet.plist.orig
 sudo cp $TEMPLATE_DIR/$path/* $path
 
+mkdir -p $HOME/Library/Developer/Xcode/UserData
 cp $TEMPLATE_DIR/Library/Developer/Xcode/UserData/KeyBindings/* $HOME/Library/Developer/Xcode/UserData/KeyBindings
 

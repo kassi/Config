@@ -61,6 +61,7 @@ header "Homebrew: installing libraries other bottles and programming languages d
 header "Homebrew: installing command line tools"
 brew install ack
 brew install blueutil
+brew install chrome-cli
 brew install ctags
 brew install git
 brew install htop

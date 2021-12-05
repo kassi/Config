@@ -21,13 +21,13 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_DUPS
 
 if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
-  if [[ -f "~/Library/Fonts/Hack Regular Nerd Font Complete.ttf" ]]; then
+  if [[ -f ~/Library/Fonts/Hack\ Regular\ Nerd\ Font\ Complete.ttf ]]; then
     PROMPT='%F{016}%K{#606060}%f%k%K{#606060} %* %F{#a0a0a0}%f %B%~%b %F{#606060}%K{016}%f%k '
   fi
 fi
 
 [[ -e "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh" || true
-[[ -s "/usr/local/opt/asdf/asdf.sh" ]] && source "/usr/local/opt/asdf/asdf.sh"
+[[ -s "/opt/homebrew/opt/asdf/asdf.sh" ]] && source "/opt/homebrew/opt/asdf/asdf.sh"
 
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
@@ -36,4 +36,4 @@ compinit
 zstyle ':completion:*' special-dirs true
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"

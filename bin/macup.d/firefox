@@ -1,10 +1,10 @@
 #!/bin/bash
 
-bt install
-mv $HOME/.mozilla/native-messaging-hosts/brotab_mediator.json $HOME/Library/ApplicationSupport/Mozilla/NativeMessagingHosts/
-rm -rf $HOME/.mozilla
+# bt install
+# mkdir -p $HOME/Library/Application\ Support/Mozilla/NativeMessagingHosts/
+# mv $HOME/.mozilla/native-messaging-hosts/brotab_mediator.json $HOME/Library/Application\ Support/Mozilla/NativeMessagingHosts/
+# rm -rf $HOME/.mozilla
 applications=(
-  Firefox
   FirefoxDeveloperEdition
 )
 
@@ -16,7 +16,7 @@ extensions_Firefox=(
   brotab
   i-dont-care-about-cookies
   cookie-autodelete
-  fvd-speed-dial
+  groupspeeddial
 )
 extensions_FirefoxDeveloperEdition=(
   1password-x-password-manager
@@ -30,14 +30,17 @@ extensions_FirefoxDeveloperEdition=(
   brotab
   i-dont-care-about-cookies
   cookie-autodelete
+  groupspeeddial
 )
 
 for app in ${applications[@]}; do
-  new=--new-window
-  for ext in ${esxtensions[@]}; do
-    echo $ext 
-    /Applications/$app.app/Contents/MacOS/firefox $new https://addons.mozilla.org/de/firefox/addon/$ext
-    new=--new-tab
+  cmd=/Applications/$app.app/Contents/MacOS/firefox
+  if [ $app = "FirefoxDeveloperEdition" ]; then
+    cmd=/Applications/Firefox\ Developer\ Edition.app/Contents/MacOS/firefox
+  fi
+  exts=extensions_$app[@]
+  for ext in ${!exts}; do
+    "$cmd" https://addons.mozilla.org/de/firefox/addon/$ext &
   done
 done
 exit

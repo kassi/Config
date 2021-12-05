@@ -73,13 +73,13 @@ defaults write com.apple.dock mru-spaces -bool false
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# System Preferences > Accessibility > Voide Over: off
-defaults write com.apple.universalaccess voideOverOnOffKey -bool false
+# System Preferences > Accessibility > Voice Over: off
+defaults write com.apple.universalaccess voiceOverOnOffKey -bool false
 
 # System Preferences > Accessibility > Zoom > scroll gesture with ctrl
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad HIDScrollZoomModifierMask -int 262144
 defaults write com.apple.driver.AppleMultitouchTrackpad HIDScrollZoomModifierMask -int 262144
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -223,6 +223,5 @@ networksetup -setv6off Wi-Fi
 killall Dock
 killall Finder
 echo "Some changes require a logout or restart to take effect."
-echo "Enabling 'Unlock with Apple Watch' needs firther steps"
+echo "Enabling 'Unlock with Apple Watch' needs further steps"
 open -b com.apple.systempreferences /System/Library/PreferencePanes/Security.prefPane
-

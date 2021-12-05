@@ -26,6 +26,11 @@ PATH=/opt/homebrew/bin:$PATH
 # OSX: Make clean tarballs and more in Leopard
 export COPYFILE_DISABLE=true
 
+# ASDF
+export ASDF_NPM_DEFAULT_PACKAGES_FILE=$HOME/.config/asdf/default-npm-packages
+export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=$HOME/.config/asdf/default-python-packages
+export ASDF_GEM_DEFAULT_PACKAGES_FILE=$HOME/.config/asdf/default-gem-packages
+
 # Erlang
 export ERL_AFLAGS="-kernel shell_history enabled"
 
@@ -34,24 +39,24 @@ export JAVA_HOME=/Library/Java/Home
 PATH=${JAVA_HOME}:$PATH
 
 ### MySQL
-export MYSQL_HOME=/usr/local/opt/mysql@5.7/bin
-# export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+export MYSQL_HOME=/opt/homebrew/opt/mysql@5.7/bin
+# export DYLD_LIBRARY_PATH=/opt/homebrew/mysql/lib:$DYLD_LIBRARY_PATH
 PATH=${MYSQL_HOME}:$PATH
 
-### Oly
-PATH=$HOME/.oly/bin:$PATH
+### Ruby
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # set up vars for keg-only libraries installed via homebrew
 LDFLAGS=()
 CPPFLAGS=()
 PKG_CONFIG_PATH=()
 for lib in "icu4c" "openssl@1.1" "readline" "libpq"; do
-  LDFLAGS+=(-L/usr/local/opt/$lib/lib)
-  CPPFLAGS+=(-I/usr/local/opt/$lib/include)
-  PKG_CONFIG_PATH+=(/usr/local/opt/$lib/lib/pkgconfig)
+  LDFLAGS+=(-L/opt/homebrew/opt/$lib/lib)
+  CPPFLAGS+=(-I/opt/homebrew/opt/$lib/include)
+  PKG_CONFIG_PATH+=(/opt/homebrew/opt/$lib/lib/pkgconfig)
 done
 for lib in "openssl@1.1" "libpq"; do
-  PATH=/usr/local/opt/$lib/bin:$PATH
+  PATH=/opt/homebrew/opt/$lib/bin:$PATH
 done
 LDFLAGS="$LDFLAGS"
 CPPFLAGS="$CPPFLAGS"
@@ -60,7 +65,8 @@ export LDFLAGS
 export CPPFLAGS
 export PKG_CONFIG_PATH
 
-PATH=$HOME/bin:/usr/local/sbin:$PATH
+PATH=$HOME/bin:/opt/homebrew/sbin:$PATH
 
 [[ -r $HOME/.zsh/aliases ]] && . $HOME/.zsh/aliases
 [[ -r $HOME/.zsh/functions ]] && . $HOME/.zsh/functions
+
