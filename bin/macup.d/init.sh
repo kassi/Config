@@ -11,21 +11,18 @@ if [[ -d $destination ]]; then
   fi
 fi
 
-# Command Line Developer Tools are needed for git to clone…
-#echo "Installing Xcode Command Line Tools."
-#while [[ $((xcode-select --install) 2>&1) =~ "xcode-select: note: " ]]; do
-#  while [[ -n $(ps ax | grep "Install Command Line Developer Tools.app" | grep -v grep) ]]
-#  do
-#    sleep 10
-#  done
-#done
-
 # Need a valid ssh key
-if [[ ! -e $HOME/.ssh/id_ed25519 ]]; then
+ssh_private_key=
+if [[ -e $HOME/.ssh/id_ed25519 ]]; then
+  ssh_private_key=$HOME/.ssh/id_ed25519
+elif [[ -e $HOME/.ssh/id_rsa ]]; then
+  ssh_private_key=$HOME/.ssh/id_rsa
+else
   echo "No ssh key found."
   read -p "Press ENTER to create a new one or CTRL-C to cancel and copy an existing one in place" < /dev/tty
   ssh-keygen -b 4096
-  cat $HOME/.ssh/id_rsa.pub | pbcopy
+  ssh_private_key=$(ls -1 $HOME/.ssh/id_* | grep -v .pub | head -1)
+  cat $ssh_private_key.pub | pbcopy
   echo "Now create a new key in Github and paste the copied public key"
   open "https://github.com/settings/ssh/new"
   read -p "Press ENTER when done" < /dev/tty

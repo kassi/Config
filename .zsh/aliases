@@ -1,11 +1,11 @@
-#echo .zsh/aliases
+# echo .zsh/aliases
 # System aliases
 alias env='env|sort'
 alias grep='grep --color'
-alias l='ls -Fg'
-alias la='ls -la'
-alias ll='ls -l'
-alias ls='ls -FG'
+alias l='gls --color --group-directories-first --time-style=long-iso -lFG'
+alias la='gls --color --group-directories-first --time-style=long-iso -lFa'
+alias ll='gls --color --group-directories-first --time-style=long-iso -lF'
+alias ls='gls --color --group-directories-first --time-style=long-iso'
 
 # Projects
 alias dev='cd ~/SynologyDrive/Develop/'
@@ -13,16 +13,26 @@ alias dev='cd ~/SynologyDrive/Develop/'
 # Git shortcuts
 alias gpr='git pull --rebase'
 alias gps='git push'
+alias gpst='git push && git push --tags'
+alias gpstf='git push -f && git push -f --tags'
 
-# Rails
+# Python
+alias pr='poetry run'
+alias pbi='poetry build | grep "\- Built" | grep ".whl" | awk "{print \"dist/\" \$3}" | xargs pip install --force-reinstall'
+alias pwt='poetry run ptw --now .'
+
+# Ruby / Rails
 alias b='bundle'
 alias be='bundle exec'
+alias beg='bundle exec guard'
 alias bo='bundle open'
 alias boe='bundle outdated --only-explicit'
-alias br='bin/rails'
+alias br='bundle exec rake'
 alias by='bundle && yarn'
+alias cop='bundle exec rubocop'
+alias copa='bundle exec rubocop -A'
 alias g='bundle exec guard'
-alias rake='safe_rake'
+# alias rake='safe_rake'
 alias rr='bundle exec rake routes'
 
 # Docker
@@ -31,10 +41,24 @@ alias dc1='docker-compose-v1'
 alias dcc='DOCKER_HOST=$(docker context inspect | grep Host.*ssh | cut -d \" -f 4) docker-compose'
 alias dcr='docker-compose run --rm'
 alias dcs='DOCKER_CONTEXT=v1 docker-compose'
+alias tf='terraform'
 
 # Tools
+alias 1p='eval $(op signin)'
+alias ansg='ansible-galaxy'
+alias ansp='ansible-playbook'
+alias fl='op run --env-file ~/.config/opsecrets --no-masking -- bundle exec fastlane'
 alias ip='curl http://ipv4.icanhazip.com'
 alias st='/Applications/SourceTree.app/Contents/Resources/stree'
+alias bu='blueutil'
+alias buc='blueutil --connect c4-0b-31-03-2d-1c'
+alias bud='blueutil --disconnect c4-0b-31-03-2d-1c'
+alias tmlog="log stream --predicate 'subsystem == \"com.apple.TimeMachine\"' --info"
 
 # Helper
 alias kill-code="ps ax | grep 'Visual Studio Code' | grep -v grep | awk '{print \$1}' | xargs kill -9"
+alias ansible-vault="EDITOR='code -w' ansible-vault"
+alias v1="ssh root@v1"
+alias v2="ssh root@v2"
+alias v3="ssh root@v3"
+alias planetutils="docker run --rm -v ${PWD}/data:/data -t ghcr.io/interline-io/planetutils:v0.4.13"

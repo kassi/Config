@@ -1,0 +1,18 @@
+#!/bin/bash
+source $HOME/bin/logger.sh
+{
+env | while IFS="=" read -r var value; do
+  if [[ -n "$value" ]]; then
+    echo "var: $var"
+    case "$var" in
+      _*)
+        ;;
+      PS1)
+        ;;
+      *)
+        launchctl setenv $var "$value"
+        ;;
+    esac
+  fi
+done
+} 2>&1 | logit

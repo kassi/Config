@@ -4,7 +4,7 @@
   ci = commit
   co = checkout
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  lm = log master.. --no-merges
+  lm = log main.. --no-merges
   st = status -sb
   show-config = config --list --show-origin
 
@@ -18,18 +18,36 @@
 
 [core]
   editor = vim
-	excludesfile = ~/.config/git/ignore
+	excludesfile = /Users/Kassi/.config/git/ignore
 
 [user]
-	email = kassi@users.noreply.github.com
+  # email = karsten+bitbucket@kluks.de
+  # email = kassi+github@kluks.de
+	email = 993392+kassi@users.noreply.github.com
 	name = Karsten Silkenbäumer
+
+[diff]
+  tool = opendiff
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-	template = ~/.stCommitMsg
+
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
+# [url "git@github.com:"]
+# 	insteadOf = https://github.com/
+[credential "https://github.com"]
+	helper = 
+  helper = !/opt/homebrew/bin/gh auth git-credential
+  username = kassi
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[commit]
+	template = /Users/Kassi/.stCommitMsg

@@ -1,3 +1,7 @@
+# echo .zsh/functions
+#
+#
+
 # Tool for managing personal config files
 # Basically a git command line tool with special settings.
 function config() {
@@ -9,7 +13,7 @@ function editconfig() {
 }
 
 # Print the path in a readable way
-function path() {
+function p() {
   ruby -e 'require "pp"; pp ENV["PATH"].split(":")'
 }
 
@@ -65,20 +69,43 @@ function stdiff() {
   #rm $tmp1 $tmp2
 }
 
-
-# List chrome extensions
-function google-chrome-list-extensions() {
-  ext_path="$HOME/Library/ApplicationSupport/Google/Chrome/Default/Extensions"
-  cd $ext_path
-  for f in $(find . -maxdepth 3 -name manifest.json); do
-    id=${f#./}
-    id=${id%%/*}
-    echo -n "$id # "
-    cat $f | jq -r '.| "\(.name)"'
-  done
+# disconnect mouse
+function disconnect-mouse() {
+  blueutil --disconnect $MM --wait-disconnect $MM
+  blueutil --unpair $MM
 }
 
-function upload_gem() {
-  name="$1"
-  curl -X POST -u $USER -F "file=@${name}" https://gems.xing.com/upload
+function connect-mouse() {
+  blueutil --pair $MM
+  blueutil --connect $MM --wait-connect $MM
+}
+
+function reconnect-mouse() {
+  if [[ -n $1 ]]; then
+    ssh nb zsh -l -c disconnect-mouse
+  fi
+  blueutil --unpair $MM
+  blueutil -p 0
+  sleep 1
+  blueutil -p 1
+  blueutil --pair $MM
+  blueutil --connect $MM --wait-connect $MM
+}
+
+# Diff same file on both vservers
+function vsdiff() {
+  file=$1
+  # diff $@ <(ssh root@v1 "cat $file") <(ssh root@v2 "cat $file")
+  vimdiff scp://root@v1/$file scp://root@v2/$file
+}
+
+function logs() {
+  logpath=~/Library/Logs/Kassi
+  if [[ -z $1 ]]; then tail -f $logpath/*.log;
+  else tail -f $logpath/$1; fi
+}
+
+function oprun() {
+  COMMAND="$@"
+  op run --env-file ~/.config/opsecrets --no-masking -- /bin/bash -c "$COMMAND"
 }
