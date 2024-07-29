@@ -21,7 +21,7 @@ fi
 #done
 
 # Need a valid ssh key
-if [[ ! -e $HOME/.ssh/id_rsa ]]; then
+if [[ ! -e $HOME/.ssh/id_ed25519 ]]; then
   echo "No ssh key found."
   read -p "Press ENTER to create a new one or CTRL-C to cancel and copy an existing one in place" < /dev/tty
   ssh-keygen -b 4096
