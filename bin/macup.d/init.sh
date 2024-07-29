@@ -12,13 +12,13 @@ if [[ -d $destination ]]; then
 fi
 
 # Command Line Developer Tools are needed for git to clone…
-echo "Installing Xcode Command Line Tools."
-while [[ $((xcode-select --install) 2>&1) =~ "xcode-select: note: " ]]; do
-  while [[ -n $(ps ax | grep "Install Command Line Developer Tools.app" | grep -v grep) ]]
-  do
-    sleep 10
-  done
-done
+#echo "Installing Xcode Command Line Tools."
+#while [[ $((xcode-select --install) 2>&1) =~ "xcode-select: note: " ]]; do
+#  while [[ -n $(ps ax | grep "Install Command Line Developer Tools.app" | grep -v grep) ]]
+#  do
+#    sleep 10
+#  done
+#done
 
 # Need a valid ssh key
 if [[ ! -e $HOME/.ssh/id_rsa ]]; then
